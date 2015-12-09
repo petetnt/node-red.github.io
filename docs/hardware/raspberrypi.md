@@ -23,14 +23,12 @@ standard package manager:
 
 To start Node-RED, you can either:
 
-  - on the Desktop, select `Menu->Programming->Node-RED`.
+  - on the Desktop, select `Menu -> Programming -> Node-RED`.
   - or run `node-red-start` in a new terminal window
 
 To stop Node-RED, run `node-red-stop`.
 
-To set Node-RED to run automatically on boot use the following command:
-
-    sudo update-rc.d nodered defaults
+To set Node-RED to run automatically on boot see [here](#making-node-red-autostart-on-boot).
 
 #### Adding nodes
 
@@ -86,7 +84,7 @@ Pi (Arm v6) the method of installing node.js is slightly different.
 To install Node.js on Pi 2 - and other Arm7 processor based boards, run
 the following commands:
 
-    curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
     sudo apt-get install -y build-essential python-dev python-rpi.gpio nodejs
 
 This also installs some additional dependencies.
@@ -157,6 +155,14 @@ are that we can get software PWM on all output pins, and easier access to
 interrupts on inputs meaning faster response times (rather than polling).
 </div>
 
+### Serial port
+
+If you want to use a serial port on a Pi running Node.js v0.10.x or v0.12.x and you aren't using the pre-installed image then you will need to manually install an older version of the serial port node.
+To do this:
+
+    cd ~/.node-red
+    npm i node-red-node-serialport@0.0.5
+
 ### Starting Node-RED
 
 Due to the constrained memory available on the Raspberry Pi, it is necessary to
@@ -178,6 +184,18 @@ running nothing else on your Pi you can afford to increase that figure to 256
 and possibly even higher. The command `free -h` will give you some clues as to
 how much memory is currently available.
 
+### Making Node-RED autostart on boot
+
+If you want Node-RED to run when the Pi boots up and are using the pre-installed version of Node-RED version 0.12.1, from the Raspbian SD card November 2015, use the following command.
+
+    sudo update-rc.d nodered defaults
+
+For Node-RED version 0.12.2 onwards (from `apt-get update`)
+
+    sudo systemctl enable nodered.service
+
+Otherwise see [Starting Node-RED on boot](../getting-started/running.html#starting-node-red-on-boot) for Linux.
+
 ### Using the Editor
 
 Once Node-RED is running - point a browser to the machine where Node-RED is running.
@@ -187,10 +205,13 @@ One way to find the IP address of the Pi is to use the command
 
 Then browse to `http://{the-ip-address-returned}:1880/`
 
-### Making Node-RED autostart on boot (optional)
+#### Note
 
-See [Starting Node-RED on boot](../getting-started/running.html#starting-node-red-on-boot) for Linux.
+ * **Epiphany Browser** - the default Epiphany browser has somewhat odd javascript support such that we do not recommend it's use
+with Node-RED. If you want to use a built in browser on the Pi please
+install the Iceweasel browser instead and use that to browse to http://127.0.0.1:1880.
 
+        sudo apt-get install iceweasel
 
 ### Accessing GPIO pins
 
@@ -213,17 +234,8 @@ There are also some extra hardware specific nodes (for the Pibrella, PiFace and
 LEDBorg plug on modules) available via [npm](https://www.npmjs.com/search?q=node-red-node-+).
 For example the Pibrella node can be installed as follows
 
-        cd ~/.node-red
-        npm install node-red-node-pibrella
-
-### Note
-
- * **Midori Browser** - the old Midori browser does not have adequate javascript support to
-use it with Node-RED. If you want to use a built in browser on the Pi please
-install the Epiphany browser and use that pointed at http://localhost:1880.
-Epiphany is now the default Raspbian browser, or you can install it by
-
-        sudo apt-get install epiphany-browser
+    cd ~/.node-red
+    npm install node-red-node-pibrella
 
 ***
 
@@ -243,8 +255,7 @@ There are two main ways of interacting with a Raspberry Pi using Node-RED.
 
 ### rpi-gpio nodes
 
-These use a python **nrgpio** command as part of the core install that can be
-found in \<node-red-install-directory>/nodes/core/hardware
+These use a python `nrgpio` command as part of the core install that can be found in {node-red-install-directory}/nodes/core/hardware
 
 This provides a way of controlling the GPIO pins via nodes in the Node-RED palette.
 
