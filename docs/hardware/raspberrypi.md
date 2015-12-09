@@ -36,6 +36,7 @@ To add additional nodes you must first install the `npm` tool, as it is not incl
 in the default installation:
 
     sudo apt-get install npm
+    sudo npm i -g npm
     cd ~/.node-red
     npm install node-red-{example node name}
 
@@ -157,8 +158,9 @@ interrupts on inputs meaning faster response times (rather than polling).
 
 ### Serial port
 
-If you want to use a serial port on a Pi running Node.js v0.10.x or v0.12.x and you aren't using the pre-installed image then you will need to manually install an older version of the serial port node.
-To do this:
+If you want to use a serial port on a Pi running Node.js v0.10.x or v0.12.x and
+you aren't using the pre-installed image then you will need to manually install
+an older version of the serial port node. To do this:
 
     cd ~/.node-red
     npm i node-red-node-serialport@0.0.5
@@ -174,8 +176,8 @@ be specified:
 
     node-red-pi --max-old-space-size=128
 
-If you decide to run Node-RED using the node command directly, this option must appear between node
-and red.js.
+If you decide to run Node-RED using the node command directly, this option must
+appear between node and red.js.
 
     node --max-old-space-size=128 red.js
 
@@ -186,7 +188,9 @@ how much memory is currently available.
 
 ### Making Node-RED autostart on boot
 
-If you want Node-RED to run when the Pi boots up and are using the pre-installed version of Node-RED version 0.12.1, from the Raspbian SD card November 2015, use the following command.
+If you want Node-RED to run when the Pi boots up and are using the pre-installed
+version of Node-RED version 0.12.1, from the Raspbian SD card November 2015, use
+the following command.
 
     sudo update-rc.d nodered defaults
 
@@ -207,7 +211,8 @@ Then browse to `http://{the-ip-address-returned}:1880/`
 
 #### Note
 
- * **Epiphany Browser** - the default Epiphany browser has somewhat odd javascript support such that we do not recommend it's use
+ * **Epiphany Browser** - the default Epiphany browser has somewhat odd
+javascript support such that we do not recommend it's use
 with Node-RED. If you want to use a built in browser on the Pi please
 install the Iceweasel browser instead and use that to browse to http://127.0.0.1:1880.
 
@@ -222,7 +227,8 @@ directly. The default user pi does have this access and is the recommended user
 with which to run Node-RED.
 
 If you want to run as a different user you will need either to add that user to
-the sudoers list - or maybe just access to python - for example by adding the following to sudoers using visudo.
+the sudoers list - or maybe just access to python - for example by adding the
+following to sudoers using visudo.
 
     NodeREDusername ALL=(ALL) NOPASSWD: /usr/bin/python
 
@@ -255,7 +261,8 @@ There are two main ways of interacting with a Raspberry Pi using Node-RED.
 
 ### rpi-gpio nodes
 
-These use a python `nrgpio` command as part of the core install that can be found in {node-red-install-directory}/nodes/core/hardware
+These use a python `nrgpio` command as part of the core install that can be
+found in {node-red-install-directory}/nodes/core/hardware
 
 This provides a way of controlling the GPIO pins via nodes in the Node-RED palette.
 
