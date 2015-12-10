@@ -36,7 +36,7 @@ To add additional nodes you must first install the `npm` tool, as it is not incl
 in the default installation:
 
     sudo apt-get install npm
-    sudo npm i -g npm
+    sudo npm i -g npm@2.x
     cd ~/.node-red
     npm install node-red-{example node name}
 
@@ -160,7 +160,15 @@ interrupts on inputs meaning faster response times (rather than polling).
 
 If you want to use a serial port on a Pi running Node.js v0.10.x or v0.12.x and
 you aren't using the pre-installed image then you will need to manually install
-an older version of the serial port node. To do this:
+a version of the serial port node. To do this:
+
+Debian Jessie users
+
+    cd ~/.node-red
+    sudo npm i -g npm@2.x
+    npm i node-red-node-serialport
+
+Debian Wheezy users should use the older serialport package
 
     cd ~/.node-red
     npm i node-red-node-serialport@0.0.5
