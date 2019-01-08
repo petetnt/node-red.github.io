@@ -20,7 +20,7 @@ There are two approaches:
 
 3. Create AWS credentials and save in a local file (~/.aws/config or Usersusername.awsconfig) as below
 
-    ```
+```
 [profile eb-cli]
 aws_access_key_id = key id
 aws_secret_access_key = access key
